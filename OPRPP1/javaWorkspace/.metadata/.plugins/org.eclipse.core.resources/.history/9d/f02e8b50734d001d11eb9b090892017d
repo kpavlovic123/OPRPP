@@ -1,0 +1,84 @@
+package hr.fer.oprpp1.custom.collections;
+
+public class LinkedListIndexedCollection extends Collection{
+	private static class ListNode{
+		ListNode previous;
+		ListNode next;
+		Object value;
+	};
+	private int size;
+	private ListNode first;
+	private ListNode last;
+	
+	public LinkedListIndexedCollection(){
+		this.first = null;
+		this.last = null;
+	};
+	
+	public LinkedListIndexedCollection(Collection col) {
+		this();
+		this.addAll(col);
+	};
+	
+	boolean isEmpty() {
+		if(size==0)
+			return true;
+		return false;
+	};
+	
+	int size() {
+		return this.size;
+	};
+	
+	void add(Object value) {
+		if(value == null)
+			throw new NullPointerException("Null pointer reference");
+		ListNode ins = new ListNode();
+		ins.value = value;
+		if(this.first == null) {
+			this.first = ins;
+			this.last = ins;
+			size++;
+			return;
+		}
+		last.next=ins;
+		last.next.previous = last;
+		last = last.next;
+		size++;
+	};
+	
+	boolean contains(Object value) {
+		if (first == null)
+				return false;
+		ListNode tmp = first;
+		do {
+			if(tmp.value == value)
+				return true;
+			tmp = tmp.next;
+		}
+		while(tmp != null);
+		return false;
+	};
+
+	boolean remove(Object value) {
+		if(first == null)
+			return false;
+		ListNode tmp = first;
+		do {
+			if(tmp.value == value) {
+				tmp.previous.next = tmp.next;
+				tmp.next.previous = tmp.previous;
+				if(tmp == first)
+					first = tmp.next;
+				if(tmp == last)
+					last = tmp.previous;
+				size--;
+				return true;
+			}
+			tmp = tmp.next;
+		}while(tmp != null);
+		return false;
+	};
+	
+	
+}

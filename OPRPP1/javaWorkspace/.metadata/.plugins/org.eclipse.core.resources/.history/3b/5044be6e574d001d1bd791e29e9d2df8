@@ -1,0 +1,73 @@
+package hr.fer.oprpp1.custom.collections;
+
+public class ArrayIndexedCollection extends Collection  {
+	private int size = 0;
+	private Object[] elements;
+	
+	public ArrayIndexedCollection () {
+		this.elements = new Object[16];
+	};
+	public ArrayIndexedCollection (int initialCapacity) {
+		if(initialCapacity < 1) {
+			throw new IllegalArgumentException("Capacity less than 1.");
+		}
+		this.elements = new Object[initialCapacity];
+	};
+	public ArrayIndexedCollection (Collection col) {
+		this();
+		if(col == null) {
+			throw new NullPointerException("Given collection is a null reference");
+		}
+		this.addAll(col);
+	};
+	public ArrayIndexedCollection(Collection col,int initialCapacity) {
+		this(initialCapacity);
+		if(col == null) {
+			throw new NullPointerException("Given collection is a null reference");
+		}
+		if (col.size() > initialCapacity) {
+			elements = new Object[col.size()];
+		}
+		this.addAll(col);
+	};
+	
+	boolean isEmpty() {
+		if(this.size == 0) {
+			return true;
+		}
+		return false;
+	};
+	
+	int size() {
+		return this.size;
+	};
+	
+	void add(Object value) {
+		if (value == null) {
+			throw new NullPointerException("Given object is a null reference");
+		}
+		if(elements.length <= this.size) {
+			Object[] elementsTmp = elements;
+			elements = new Object[elements.length*2];
+			for (int i = 0;i<elementsTmp.length;i++) {
+				elements[i]=elementsTmp[i];
+			}
+		}
+		elements[size++]=value;
+	};
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

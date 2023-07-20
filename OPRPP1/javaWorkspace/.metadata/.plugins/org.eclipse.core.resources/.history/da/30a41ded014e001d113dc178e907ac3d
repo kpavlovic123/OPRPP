@@ -1,0 +1,84 @@
+package hr.fer.oprpp1.custom.collections;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
+public class ArrayIndexedCollectionTest {
+
+	@Test
+	public void testCon1() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		Integer expected = 0;
+		assertEquals(expected,col.size());
+	}
+	
+	@Test
+	public void testCon2() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		Integer expected = 0;
+		assertEquals(expected,col.size());
+	}
+	
+	@Test
+	public void testCon3() {
+		ArrayIndexedCollection col2 = new ArrayIndexedCollection();
+		col2.add(1);
+		col2.add(2);
+		ArrayIndexedCollection col = new ArrayIndexedCollection(col2);
+		Integer expected = 2;
+		assertEquals(expected,col.size());
+	}
+	
+	@Test
+	public void testCon4() {
+		ArrayIndexedCollection col2 = new ArrayIndexedCollection();
+		col2.add(1);
+		col2.add(2);
+		ArrayIndexedCollection col = new ArrayIndexedCollection(col2,5);
+		Integer expected = 2;
+		assertEquals(expected,col.size());
+	}
+	
+	@Test
+	public void testNullAdd() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		assertThrows(NullPointerException.class, () -> col.add(null));
+	}
+	@Test
+	public void testGetFunction() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		col.add(2);
+		Integer expected = 2;
+		assertEquals(expected,col.get(0));
+	}
+	@Test
+	public void testClearFunction() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		col.add(2);
+		Integer expected = 0;
+		col.clear();
+		assertEquals(expected,col.size());
+	}
+	@Test
+	public void testInsertThrows() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		assertThrows(IndexOutOfBoundsException.class, () -> col.insert(5,-1));
+	}
+	
+	@Test
+	public void testIndexOfFunction() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		col.add(2);
+		col.add(3);
+		Integer expected = 1;
+		assertEquals(expected,col.indexOf(3));
+	}
+	
+	@Test
+	public void testRemoveThrows() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		assertThrows(IndexOutOfBoundsException.class, () -> col.remove(-1));
+	}
+	
+	
+}

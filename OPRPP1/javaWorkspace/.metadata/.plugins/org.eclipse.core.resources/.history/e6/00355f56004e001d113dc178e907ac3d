@@ -1,0 +1,19 @@
+package hr.fer.oprpp1.custom.collections;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class LinkedListIndexedCollectionTest {
+	
+	@Test
+	public void testNullAdd() {
+		LinkedListIndexedCollection col = new LinkedListIndexedCollection();
+		assertThrows(NullPointerException.class, () -> col.add(null));
+	}
+	
+	@Test
+	public void testGetThrows() {
+		LinkedListIndexedCollection col = new LinkedListIndexedCollection();
+		assertThrows(IndexOutOfBoundsException.class, () -> col.get(-1));
+	}
+
+}

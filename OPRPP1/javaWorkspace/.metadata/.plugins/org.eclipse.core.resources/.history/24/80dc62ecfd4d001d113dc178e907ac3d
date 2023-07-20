@@ -1,0 +1,12 @@
+package hr.fer.oprpp1.custom.collections;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
+public class CollectionTest {
+	@Test
+	public void testNullArray() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		assertThrows(NullPointerException.class, () -> col.add(null));
+	}
+}

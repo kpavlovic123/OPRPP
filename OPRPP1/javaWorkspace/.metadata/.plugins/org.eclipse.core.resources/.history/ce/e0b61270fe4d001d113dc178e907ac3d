@@ -1,0 +1,26 @@
+package hr.fer.oprpp1.custom.collections;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
+public class CollectionTest {
+	@Test
+	public void testNullAdd() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		assertThrows(NullPointerException.class, () -> col.add(null));
+	}
+	@Test
+	public void testGetFunction() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		col.add(2);
+		Integer expected = 2;
+		assertEquals(expected,col.get(0));
+	}
+	public void testClearFunction() {
+		ArrayIndexedCollection col = new ArrayIndexedCollection();
+		col.add(2);
+		Integer expected = 0;
+		col.clear();
+		assertEquals(expected,col.size());
+	}
+}

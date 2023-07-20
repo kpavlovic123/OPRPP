@@ -1,0 +1,41 @@
+package hr.fer.oprpp1.custom.collections;
+
+public interface Collection {
+	
+	default boolean isEmpty() {
+		if(this.size()!=0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	};
+	
+	int size();
+	
+	void add(Object value);
+	
+	boolean contains(Object value);
+	
+	boolean remove(Object value);
+	
+	Object[] toArray();
+	
+	void forEach(Processor processor);
+	
+	default void addAll(Collection other) {
+		class Adder implements Processor {
+			public void process(Object value) {
+				Collection.this.add(value);
+			};
+		};
+		Adder adder = new Adder();
+		other.forEach(adder);
+	};
+	
+	void clear();
+	
+	public static class ElementsGetter{};
+	
+	ElementsGetter createElementsGetter();
+}

@@ -1,0 +1,13 @@
+package hr.fer.oprpp1.custom.collections;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class LinkedListArrayCollectionTest {
+	
+	@Test
+	public void testNullAdd() {
+		LinkedListIndexedCollection col = new LinkedListIndexedCollection();
+		assertThrows(NullPointerException.class, () -> col.add(null));
+	}
+
+}

@@ -1,0 +1,111 @@
+package hr.fer.oprpp1.custom.collections;
+
+public class LinkedListIndexedCollection extends Collection{
+	private static class ListNode{
+		ListNode previous;
+		ListNode next;
+		Object value;
+	};
+	private int size;
+	private ListNode first;
+	private ListNode last;
+	
+	public LinkedListIndexedCollection(){
+		this.first = null;
+		this.last = null;
+	};
+	
+	public LinkedListIndexedCollection(Collection col) {
+		this();
+		this.addAll(col);
+	};
+	
+	boolean isEmpty() {
+		if(size==0)
+			return true;
+		return false;
+	};
+	
+	int size() {
+		return this.size;
+	};
+	
+	void add(Object value) {
+		if(value == null)
+			throw new NullPointerException("Null pointer reference");
+		ListNode ins = new ListNode();
+		ins.value = value;
+		if(this.first == null) {
+			this.first = ins;
+			this.last = ins;
+			size++;
+			return;
+		}
+		last.next=ins;
+		ins.previous = last;
+		last = ins;
+		size++;
+	};
+	
+	boolean contains(Object value) {
+		if (first == null)
+				return false;
+		ListNode tmp = first;
+		while(tmp != null) {
+			if(tmp.value == value)
+				return true;
+			tmp = tmp.next;
+		};
+		return false;
+	};
+
+	boolean remove(Object value) {
+		ListNode tmp = first;
+		while(tmp != null) {
+			if(tmp.value == value) {
+				tmp.previous.next = tmp.next;
+				tmp.next.previous = tmp.previous;
+				if(tmp == first)
+					first = tmp.next;
+				if(tmp == last)
+					last = tmp.previous;
+				size--;
+				return true;
+			}
+			tmp = tmp.next;
+		}
+		return false;
+	};
+	
+	Object[] toArray() {
+		Object[] a = new Object[size];
+		ListNode tmp = first;
+		int i = 0;
+		while(tmp != null) {
+			a[i++]=tmp.value;
+			tmp = tmp.next;
+		};
+		return a;
+	};
+	
+	void forEach(Processor processor) {
+		ListNode tmp = first;
+		while(tmp != null) {
+			processor.process(tmp.value);
+			tmp = tmp.next;
+		}
+	};
+	
+	void clear() {
+		first = null;
+		last = null;
+		size = 0;
+	};
+	
+	Object get (int index) {
+		if(index < 0 || index >= size)
+			throw new IndexOutOfBoundsException("Index out of bounds.");
+		
+	};
+	
+}

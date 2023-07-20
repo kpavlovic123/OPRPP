@@ -1,0 +1,25 @@
+package hr.fer.oprpp1.custom.collections;
+
+public class ObjectStack {
+	private ArrayIndexedCollection adaptee;
+	public ObjectStack() {
+		this.adaptee = new ArrayIndexedCollection();
+	};
+	boolean isEmpty() {
+		return adaptee.isEmpty();
+	};
+	int size() {
+		return adaptee.size();
+	};
+	void push(Object value) {
+		adaptee.add(value);
+	};
+	Object pop() {
+		int last = adaptee.size()-1;
+		Object o = adaptee.get(last);
+		adaptee.remove(last);
+		return o;
+	};
+	
+	
+}
